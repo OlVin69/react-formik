@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid #212121;
+    border-radius: 4px;
+}
+
+.container {
+
+}
