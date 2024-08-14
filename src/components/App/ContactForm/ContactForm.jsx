@@ -6,16 +6,22 @@ import s from "./ContactForm.module.css";
 
 const initialValues = {
   name: "",
-  number: "",
+  phone: "",
 };
 
 const ContactForm = ({ onAdd }) => {
   const nameId = useId();
-  const numberId = useId();
+  const phoneId = useId();
 
   const handleSubmit = (values, actions) => {
-    onAdd({ id: nanoid(), name: values.name, number: values.number });
+    const newContact = {
+      id:nanoid(),
+      name:values.name,
+      phone:values.phone
+    }
+    onAdd(newContact);
     actions.resetForm();
+    
   };
 
   return (
@@ -24,21 +30,23 @@ const ContactForm = ({ onAdd }) => {
       onSubmit={handleSubmit}
       validationSchema={ContactSchema}
     >
-      <Form className={s.form}>
-        <div>
-          <label htmlFor={nameId}>Name</label>
-          <Field className={s.input} id={nameId} name="name" />
-          <ErrorMessage name="name" component="span" />
-        </div>
-        <div>
-          <label htmlFor={numberId}>Number</label>
-          <Field className={s.input} id={numberId} name="number" />
-          <ErrorMessage name="number" component="span" />
-        </div>
-        <button className={s.button} type="submit">
-          Add contact
-        </button>
-      </Form>
+      
+        <Form className={s.form}>
+          <div className={s.input}>
+            <label htmlFor={nameId}>Name</label>
+            <Field className={s.field} id={nameId} name="name" />
+            <ErrorMessage name="name" component="span" />
+          </div>
+          <div className={s.input}>
+            <label htmlFor={phoneId}>Phone</label>
+            <Field className={s.field} id={phoneId} name="phone" />
+            <ErrorMessage name="phone" component="span" />
+          </div>
+          <button className={s.button} type="submit" >
+             Add contact
+          </button>
+        </Form>
+   
     </Formik>
   );
 };
